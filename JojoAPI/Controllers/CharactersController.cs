@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JojoAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/characters")]
     public class CharactersController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
@@ -25,7 +25,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetCharacterByName")]
+        [Route("{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
             var character = await unitOfWork.Characters.GetByName(name);
@@ -36,7 +36,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetCharacterById")]
+        [Route("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var character = await unitOfWork.Characters.GetById(id);
@@ -47,7 +47,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Jojos")]
+        [Route("jojos")]
         public async Task<IActionResult> GetJojos()
         {
             var jojos = await GetCharacterBasedOnRole(Role.Jojo);
@@ -55,7 +55,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Jobros")]
+        [Route("jobros")]
         public async Task<IActionResult> GetJobros()
         {
             var jobros = await GetCharacterBasedOnRole(Role.JoBro);
@@ -63,7 +63,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Villains")]
+        [Route("villains")]
         public async Task<IActionResult> GetVillains()
         {
             var villains = await GetCharacterBasedOnRole(Role.Villain);
@@ -83,7 +83,7 @@ namespace JojoAPI.Controllers
         #region POST
 
         [HttpPost]
-        [Route("AddCharacter")]
+        [Route("")]
         public async Task<IActionResult> AddCharacter(CharacterInDTO characterInDTO)
         {
             Stand? stand = null;
@@ -97,7 +97,7 @@ namespace JojoAPI.Controllers
 
             if (existentStand != null) stand = existentStand;
 
-            Character character = new Character
+            Character character = new Character()
             {
                 Name = characterInDTO.Name,
                 SeasonDebut = characterInDTO.SeasonDebut,
@@ -106,10 +106,11 @@ namespace JojoAPI.Controllers
                 Role = characterInDTO.Role
             };
 
+
             await unitOfWork.Characters.Add(character);
             await unitOfWork.CompleteAsync();
-
-            return Ok();
+            
+            return CreatedAtAction(nameof(GetById), new { id = character.Id }, character);
         }
 
         #endregion
@@ -117,7 +118,7 @@ namespace JojoAPI.Controllers
         #region PUT
 
         [HttpPut]
-        [Route("UpdateCharacter")]
+        [Route("")]
         public async Task<IActionResult> UpdateCharacter(CharacterUpdateInDTO characterIn)
         {
             var existentCharacter = await unitOfWork.Characters.GetById(characterIn.Id);
@@ -149,7 +150,7 @@ namespace JojoAPI.Controllers
         #region DELETE
 
         [HttpDelete]
-        [Route("DeleteCharacter")]
+        [Route("")]
         public async Task<IActionResult> DeleteById(int id)
         {
             var character = await unitOfWork.Characters.GetById(id);

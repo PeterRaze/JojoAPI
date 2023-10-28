@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JojoAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/stands")]
     public class StandsController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
@@ -25,7 +25,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetStandById")]
+        [Route("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var stand = await unitOfWork.Stands.GetById(id);
@@ -36,7 +36,7 @@ namespace JojoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetStandByName")]
+        [Route("{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
             var stand = await unitOfWork.Stands.GetByName(name);
@@ -51,7 +51,7 @@ namespace JojoAPI.Controllers
         #region POST
 
         [HttpPost]
-        [Route("AddStand")]
+        [Route("")]
         public async Task<IActionResult> AddStand(StandInDTO standIn)
         {
             var standExisted = await unitOfWork.Stands.GetByName(standIn.Name);
@@ -67,8 +67,8 @@ namespace JojoAPI.Controllers
 
             await unitOfWork.Stands.Add(stand);
             await unitOfWork.CompleteAsync();
-            
-            return Ok();
+
+            return CreatedAtAction(nameof(GetById), new { id = stand.Id }, stand);
         }
 
         #endregion
@@ -76,7 +76,7 @@ namespace JojoAPI.Controllers
         #region PUT
 
         [HttpPut]
-        [Route("UpdateStand")]
+        [Route("")]
         public async Task<IActionResult> UpdateStand(Stand stand)
         {
             var standInstance = await unitOfWork.Stands.GetById(stand.Id);
@@ -94,7 +94,7 @@ namespace JojoAPI.Controllers
         #region DELETE
 
         [HttpDelete]
-        [Route("DeleteStand")]
+        [Route("")]
         public async Task<IActionResult> DeleteStandById(int standId)
         {
             var stand = unitOfWork.Stands.GetById(standId);
