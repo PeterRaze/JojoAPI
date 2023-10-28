@@ -23,5 +23,17 @@ namespace JojoAPI.Core.Repositories
         {
             return await dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Name == name && x.Surname == surname);
         }
+
+        public override async Task<bool> Add(Character entity)
+        {
+            if (entity.Stand != null)
+            {
+                var standId = entity.Stand?.Id;
+                entity.Stand = context.Stands.SingleOrDefault(x => x.Id == standId);
+            }
+
+            dbSet.Add(entity);
+            return true;
+        }
     }
 }

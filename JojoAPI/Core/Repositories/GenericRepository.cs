@@ -17,12 +17,12 @@ namespace JojoAPI.Core.Repositories
             this.dbSet = context.Set<T>();
         }
 
-        public async Task<bool> Add(T entity)
+        public virtual async Task<bool> Add(T entity)
         {
             dbSet.Add(entity);
             return true;
         }
-
+        
         public async Task<bool> Delete(T entity)
         {
             dbSet.Remove(entity);
