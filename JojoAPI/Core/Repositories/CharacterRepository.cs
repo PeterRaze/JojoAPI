@@ -16,8 +16,14 @@ namespace JojoAPI.Core.Repositories
 
         public async Task<Character?> GetByName(string name)
         {
-            return await dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Name == name);
+            return await dbSet.AsNoTracking().Include(x => x.Stand).FirstOrDefaultAsync(x => x.Name == name);
         }
+
+        public async override Task<Character?> GetById(int id)
+        {
+            return await dbSet.AsNoTracking().Include(x => x.Stand).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
 
         public async Task<Character?> GetByNameAndSurname(string name, string surname)
         {

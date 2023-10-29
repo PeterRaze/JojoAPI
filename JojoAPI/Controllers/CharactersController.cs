@@ -150,7 +150,7 @@ namespace JojoAPI.Controllers
         #region DELETE
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id:int}")]
         public async Task<IActionResult> DeleteById(int id)
         {
             var character = await unitOfWork.Characters.GetById(id);
