@@ -54,44 +54,44 @@ Run the following command:
 
 ##### GET
 
-- [/api/characters](#markdown-header-get-apicharacters)
-- [/api/characters/{name}](#markdown-header-get-apicharactersname) 
-- [/api/characters/{id}](#markdown-header-get-apicharactersid)
-- [/api/characters/jojos](#markdown-header-get-apiusersid) 
-- [/api/characters/jobros](#markdown-header-get-apiusersid) 
-- [/api/characters/villains ](#markdown-header-get-apiusersid) 
+- [/api/characters](#get-apicharacters)
+- [/api/characters/{id}](#get-apicharactersid)
+- [/api/characters/{name}](#get-apicharactersname) 
+- [/api/characters/jojos](#get-apicharactersjojos) 
+- [/api/characters/jobros](#get-apicharactersjobros) 
+- [/api/characters/villains ](#get-apicharactersvillains) 
 
 ##### POST
 
-- [/api/characters](#markdown-header-post-apiusersregister)
+- [/api/characters](#post-apicharacters)
 
 ##### PUT
 
-- [/api/characters](#markdown-header-put-apiusersid)
+- [/api/characters](#put-apicharacters)
 
 ##### DELETE
 
-- [/api/characters](#markdown-header-delete-apiusersid)
+- [/api/characters/{id}](#delete-apicharactersid)
 
 ### Stands
 
 ##### GET
 
-- [/api/stands](#markdown-header-get-apileaderboard)
-- [/api/stands/{name}](#markdown-header-get-apileaderboardtopn) 
-- [/api/stands/{id}](#markdown-header-get-apiusers)
+- [/api/stands](#get-apistands)
+- [/api/stands/{id}](#get-apistandsid)
+- [/api/stands/{name}](#get-apistandsname) 
 
 ##### POST
 
-- [/api/stands](#markdown-header-post-apiusersregister)
+- [/api/stands](#post-apistands)
 
 ##### PUT
 
-- [/api/stands](#markdown-header-put-apiusersid)
+- [/api/stands](#put-apistands)
 
 ##### DELETE
 
-- [/api/stands](#markdown-header-delete-apiusersid)
+- [/api/stands](#delete-apistandsid)
 
 ## GET /api/characters
 
@@ -99,7 +99,7 @@ Run the following command:
 Returns a list of all characters.
 
 **Return type**  
-array [Character]
+array [[Character]](#character)
 
 **Server Response**
 **Example data**  
@@ -132,7 +132,7 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success array [Character]
+Success array [[Character]](#character)
 
 ## GET /api/characters/{id}
 
@@ -140,7 +140,7 @@ Success array [Character]
 Returns a specific character by its ID.
 
 **Return type**  
-[Character]
+[[Character]](#character)
 
 **Parameters**  
 **Path parameters**  
@@ -171,7 +171,7 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success [Character]
+Success [[Character]](#character)
 
 **404**  
 Not Found
@@ -182,12 +182,12 @@ Not Found
 Returns a specific character by its name.
 
 **Return type**  
-[Character]
+[[Character]](#character)
 
 **Parameters**  
 **Path parameters**  
 > **Name (required)**  
-> Path Parameter -> format: string
+> Path Parameter -> format: String
 
 
 **Server Response**
@@ -211,7 +211,7 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success [Character]
+Success [[Character]](#character)
 
 **404**  
 Not Found
@@ -219,7 +219,7 @@ Not Found
 ## GET /api/characters/jojos
 
 **Return type**  
-array [Character]
+array [[Character]](#character)
 
 **Description**  
 Return the characters who have the role defined as Jojo.
@@ -260,12 +260,12 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success array [Character]
+Success array [[Character]](#character)
 
 ## GET /api/characters/jobros
 
 **Return type**  
-array [Character]
+array [[Character]](#character)
 
 **Description**  
 Return the characters who have the role defined as JoBro.
@@ -306,12 +306,12 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success array [Character]
+Success array [[Character]](#character)
 
 ## GET /api/characters/villains
 
 **Return type**  
-array [Character]
+array [[Character]](#character)
 
 **Description**  
 Return the characters who have the role defined as Villain.
@@ -352,20 +352,15 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success array [Character]
+Success array [[Character]](#character)
 
 ## POST /api/characters
-
-**Return type**  
-[Character]  
 
 **Description**  
 Register a user.
 
-**Parameters**
-
 **Request body**  
-> **body [CharacterInDTO](#markdown-header-userdto) (required)**  
+> **body [CharacterInDTO](#characterindto) (required)**  
 > Body Parameter 
 
 **Server Response**
@@ -413,7 +408,7 @@ Not Found
 Update a character.  
 
 **Request body**  
-> **body [CharacterUpdateInDTO](#markdown-header-userdto) (required)**  
+> **body [CharacterUpdateInDTO](#characterupdateindto) (required)**  
 >  Body Parameter
 
 **Responses**  
@@ -429,7 +424,7 @@ Not Found
 Returns a list of all stands.
 
 **Return type**  
-array [Stand]
+array [[Stand]](#stand)
 
 **Server Response**
 **Example data**  
@@ -453,7 +448,7 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success array [Stand]
+Success array [[Stand]](#stand)
 
 ## GET /api/stands/{id}
 
@@ -461,7 +456,7 @@ Success array [Stand]
 Returns a specific stand by its ID.
 
 **Return type**  
-[Stand]
+[[Stand]](#stand)
 
 **Parameters**  
 **Path parameters**  
@@ -484,7 +479,7 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success [Stand]
+Success [[Stand]](#stand)
 
 **404**  
 Not Found
@@ -495,12 +490,12 @@ Not Found
 Returns a specific stand by its name.
 
 **Return type**  
-[Stand]
+[[Stand]](#stand)
 
 **Parameters**  
 **Path parameters**  
 > **Name (required)**  
-> Path Parameter -> format: string
+> Path Parameter -> format: String
 
 **Server Response**
 **Example data**  
@@ -518,23 +513,18 @@ Content-Type: application/json
 
 **Responses**  
 **200**  
-Success [Stand]
+Success [[Stand]](#stand)
 
 **404**  
 Not Found
 
 ## POST /api/stands
 
-**Return type**  
-[Stand]  
-
 **Description**  
 Register a stand.
 
-**Parameters**
-
 **Request body**  
-> **body [StandInDTO](#markdown-header-userdto) (required)**  
+> **body [StandInDTO](#standindto) (required)**  
 > Body Parameter 
 
 **Server Response**
@@ -575,7 +565,7 @@ Not Found
 Update a stand.  
 
 **Request body**  
-> **body [Stand](#markdown-header-userdto) (required)**  
+> **body [Stand](#stand) (required)**  
 >  Body Parameter
 
 **Responses**  
@@ -590,12 +580,12 @@ Not Found
 
 ### Table of Contents
 
-- [Character](#markdown-header-userdto)
-- [ChracterInDTO](#markdown-header-userdto)
-- [CharacterUpdateInDTO](#markdown-header-userdto)
-- [Role](#markdown-header-userdto)
-- [Stand](#markdown-header-userdto)
-- [StandInDTO](#markdown-header-userdto)
+- [Character](#character)
+- [ChracterInDTO](#characterindto)
+- [CharacterUpdateInDTO](#characterindto)
+- [Role](#role-string)
+- [Stand](#stand)
+- [StandInDTO](#standindto)
 
 ### **Description**
 
@@ -700,7 +690,7 @@ Json Example:
 }
 ```
 
-## Role string
+## Role String
 
 > **Enum**    
 > [ Jojo, JoBro, Villain]  
